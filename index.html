@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+
+		#parent, #child{
+			height: 100px;
+			width: 100px
+		}
+
+		#parent{
+			background-color: grey;
+		    white-space: pre-line;
+		    overflow: auto;
+		}
+
+		#child{
+			background-color: yellowgreen;
+			max-height: 100px;
+		}
+
+		#grandparent{
+			padding: 20px;
+			width: 200px;
+			height: 200px;
+			display: inline-block;
+			background-color: beige;
+			cursor: pointer;
+			border: 12px groove grey;
+			border-radius: 6px;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div id="grandparent" title="Click to edit !">
+		
+		<div id="parent"></div>
+		<br />
+		<input type="button" value="save" id="save">
+
+	</div>
+
+	
+
+</body>
+
+	<script type="text/javascript">
+
+		document.getElementById('grandparent').addEventListener('click', function(e){
+			if(e.target === document.getElementById('child') || e.target === document.getElementById('save')){
+				return false;
+			}
+			var textarea = document.createElement('textarea');
+			textarea.id="child";
+			textarea.value = document.getElementById('parent').innerHTML;
+			document.getElementById('parent').innerHTML = "";
+			document.getElementById('parent').appendChild(textarea);
+			textarea.focus();
+		});
+
+		document.getElementById('save').addEventListener('click', function(e){
+			document.getElementById('parent').innerHTML=document.getElementById('child').value;
+		});
+
+	</script>
+
+
+</html>
